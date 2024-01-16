@@ -1,0 +1,6 @@
+
+const uploadFile = () => {
+
+}
+
+export { uploadFile }
