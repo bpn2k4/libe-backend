@@ -26,7 +26,7 @@ const log = (message = '', type = LOGGER_TYPES.INFO) => {
   return console.log(output)
 }
 
-export const logger = {
+export const Logger = {
   log: log,
   info: (message = '') => log(message, LOGGER_TYPES.INFO),
   warn: (message = '') => log(message, LOGGER_TYPES.WARN),

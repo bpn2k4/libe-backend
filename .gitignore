@@ -7,3 +7,6 @@ data/*
 uploads/*
 !uploads/readme.md
 !uploads/hello.txt
+
+private_key.crt
+public_key.pem

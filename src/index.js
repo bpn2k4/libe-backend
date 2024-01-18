@@ -4,7 +4,7 @@ import cors from 'cors'
 import { resolve } from 'path'
 
 import { PORT } from './configs/index.js'
-import { logger } from './helpers/index.js'
+import { Logger } from './helpers/index.js'
 import { V1 } from './routers/v1.js'
 import { sql } from './databases/index.js'
 

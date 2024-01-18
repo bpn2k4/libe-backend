@@ -1,0 +1,11 @@
+-----BEGIN RSA PRIVATE KEY-----
+Paste your rsa 4096 private key here
+Your can create yourself
+Go: 
+  https://cryptotools.net/rsagen
+  or
+  https://travistidwell.com/jsencrypt/demo/
+  or use any tool
+to generate a key pair rsa 4096
+#NOTE: must be RSA 4096
+-----END RSA PRIVATE KEY-----
