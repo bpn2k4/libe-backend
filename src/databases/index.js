@@ -1,1 +1,1 @@
-export { sql } from './SQL.js'
+export * from './SQL.js'

@@ -1,8 +1,8 @@
-import { Sequelize } from 'sequelize'
+import { Sequelize, DataTypes } from 'sequelize'
 import { resolve } from 'path'
 import fs from 'fs'
 
-import { logger } from '../helpers/index.js'
+import { Logger } from '../helpers/index.js'
 import {
   SQL_DATABASE_TYPE,
   SQL_DATABASE_HOST,
@@ -28,10 +28,12 @@ const sql = new Sequelize({
     const minutes = String(date.getMinutes()).padStart(2, '0')
     const seconds = String(date.getSeconds()).padStart(2, '0')
     const time = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
-    logger.info('[SQL] ' + sql)
+    Logger.info('[SQL] ' + sql)
     fs.appendFileSync(resolve('./data/sql.log'), `${time} ${sql}\n`, { encoding: 'utf-8' })
   },
   dialect: SQL_DATABASE_TYPE,
 })
 
+
 export { sql }
+export const { INTEGER, STRING, BOOLEAN, DATE, FLOAT, TEXT } = DataTypes

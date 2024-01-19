@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "f57158f7-3ab6-44be-852b-bc6ce16a7d6c",
+		"name": "libe-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22724731"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "PIng",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/health/ping",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"health",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Liveness",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/health/liveness",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"health",
+								"liveness"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Monitor health check"
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Auth"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -4,12 +4,25 @@ import cors from 'cors'
 import { resolve } from 'path'
 
 import { PORT } from './configs/index.js'
-import { Logger } from './helpers/index.js'
+import { Helper, Logger } from './helpers/index.js'
 import { V1 } from './routers/v1.js'
 import { sql } from './databases/index.js'
+import { initModel } from './models/index.js'
 
 const boost = async () => {
 
+
+  try {
+    await Helper.wait(1000)
+    await sql.authenticate()
+    Logger.info('Connect to database successfully!')
+  } catch (error) {
+    Logger.info('Can not connect. Wait for database start...')
+    await Helper.wait(5000)
+    await sql.authenticate()
+  }
+
+  await initModel()
   const app = express()
 
   app.use(express.json())
