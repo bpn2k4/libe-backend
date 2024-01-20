@@ -4,9 +4,11 @@ node_modules/
 data/*
 !data/readme.md
 
-uploads/*
+uploads/images/*
+uploads/videos/*
 !uploads/readme.md
-!uploads/hello.txt
+!uploads/images/readme.md
+!uploads/videos/readme.md
 
 private_key.crt
 public_key.pem

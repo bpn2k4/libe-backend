@@ -20,6 +20,7 @@ const sql = new Sequelize({
   password: SQL_DATABASE_PASSWORD,
   storage: resolve('./data/sqlite.db'),
   logging: (sql) => {
+    return
     const date = new Date()
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0')

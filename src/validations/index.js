@@ -1,1 +1,1 @@
-console.log('hello')
+export { AuthValidator } from './Auth.js'

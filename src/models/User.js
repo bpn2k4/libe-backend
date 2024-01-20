@@ -46,7 +46,7 @@ const User = sql.define('User', {
   },
   birthday: {
     type: DATE,
-    allowNull: true,
+    allowNull: true
   },
   avatar: {
     type: STRING,

@@ -8,6 +8,8 @@ import { Helper, Logger } from './helpers/index.js'
 import { V1 } from './routers/v1.js'
 import { sql } from './databases/index.js'
 import { initModel } from './models/index.js'
+import { ERROR_NAMES, MESSAGES, STATUS_CODES } from './constants/index.js'
+import { errorMiddleware } from './middlewares/index.js'
 
 const boost = async () => {
 
@@ -42,10 +44,7 @@ const boost = async () => {
 
   app.use('/api/v1', V1)
 
-  app.use((err, req, res, next) => {
-    console.log(err)
-    return res.status(500).send('Error from server')
-  })
+  app.use(errorMiddleware)
 
   app.use('*', (req, res) => {
     // throw new Error('Test')

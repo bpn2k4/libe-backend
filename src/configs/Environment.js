@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import { Logger } from '../helpers/index.js'
 
 dotenv.config()
 
