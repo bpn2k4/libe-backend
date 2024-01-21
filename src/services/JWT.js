@@ -5,6 +5,7 @@ import {
   ACCESS_TOKEN_DURATION,
   REFRESH_TOKEN_DURATION
 } from '../configs/index.js'
+import { ERROR_NAMES, JWT_ERROR } from '../constants/index.js'
 
 /**@type {import('../types').JWTService} */
 export const JWTService = {
@@ -18,11 +19,14 @@ export const JWTService = {
   },
 
   verifyToken: (token) => {
+    console.log(publicKey);
     try {
-      const data = jwt.verify(token, publicKey, { algorithms: 'rs256' })
+      const data = jwt.verify(token, publicKey, { algorithms: 'RS256' })
       return { data }
     } catch (error) {
-      return { error }
+      const message = error.message == 'jwt expired' ? JWT_ERROR.TOKEN_EXPIRED : JWT_ERROR.INVALID_TOKEN
+      const name = ERROR_NAMES.JSON_WEB_TOKEN_ERROR
+      return { error: { message, name } }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes } from 'sequelize'
+import { Sequelize, DataTypes, Op } from 'sequelize'
 import { resolve } from 'path'
 import fs from 'fs'
 
@@ -36,5 +36,5 @@ const sql = new Sequelize({
 })
 
 
-export { sql }
+export { sql, Op }
 export const { INTEGER, STRING, BOOLEAN, DATE, FLOAT, TEXT } = DataTypes

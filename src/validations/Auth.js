@@ -31,6 +31,16 @@ export const AuthValidator = {
         .valid(GENDER.FEMALE, GENDER.MALE, GENDER.OTHER, GENDER.UNSET)
     })
     return schema.validate(body, options)
-  }
+  },
+
+  validateLoginForm: (data) => {
+    const schema = Joi.object({
+      username: Joi.string().required(),
+      password: Joi.string().required()
+    })
+    return schema.validate(data, options)
+  },
+
+
 
 }

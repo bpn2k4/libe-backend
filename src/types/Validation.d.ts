@@ -7,6 +7,12 @@ type RegisterForm = {
   password: String
 }
 
+type LoginForm = {
+  username: String,
+  password: String
+}
+
 export type AuthValidator = {
-  validateRegisterForm: (data: any) => { value: RegisterForm, error?: ValidationError }
+  validateRegisterForm: (data: any) => { value: RegisterForm, error?: ValidationError },
+  validateLoginForm: (data: any) => { value: LoginForm, error?: ValidationError },
 }

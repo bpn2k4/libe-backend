@@ -4,6 +4,9 @@ import { Request, Response, NextFunction } from 'express'
 type Error = {
   name: String,
   message: String,
+  error: String,
+  errorCode: Number,
+  type?: 'AccessToken' | 'RefreshToken',
   code: String,
   field: String,
   allow: String[]

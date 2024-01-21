@@ -34,6 +34,11 @@ type ServiceResult = {
 
 /** Service for handle request from controller */
 export type HandlerService = (ServiceProps: ServiceProps) => Promise<ServiceResult>
+
+type JWTError = {
+  name: String,
+  message: String
+}
 /** JWT service */
 export declare type JWTService = {
   /** Generate a access token with rsa 256 algorithm */
@@ -43,5 +48,5 @@ export declare type JWTService = {
   generateRefreshToken: (payload: any) => String,
 
   /** Verify a access token */
-  verifyToken: (token: String) => { data?: Payload, error?: any }
+  verifyToken: (token: String) => { data?: Payload, error?: JWTError }
 }

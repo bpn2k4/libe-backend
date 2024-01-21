@@ -10,7 +10,7 @@
 			"name": "Health",
 			"item": [
 				{
-					"name": "PIng",
+					"name": "Ping",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -56,6 +56,31 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fullName",
+									"value": "12313",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "taolaphu2",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12321313",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/zyro-image.png"
+								}
+							]
+						},
 						"url": {
 							"raw": "{{HOST}}/api/v1/auth/register",
 							"host": [
@@ -73,6 +98,40 @@
 				}
 			],
 			"description": "Auth"
+		},
+		{
+			"name": "Test upload file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/C:/Users/admin/Pictures/image.png"
+						},
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/C:/Users/admin/Documents/tmp.txt",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{HOST}}/api/test",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"test"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

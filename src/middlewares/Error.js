@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import { ERROR_MESSAGES, ERROR_NAMES, MULTER_ERROR, STATUS, STATUS_CODES } from '../constants/index.js'
+import { ERROR_MESSAGES, ERROR_NAMES, JWT_MESSAGES, MULTER_ERROR, STATUS, STATUS_CODES } from '../constants/index.js'
 import { ROOT } from '../configs/index.js'
 
 
@@ -76,6 +76,31 @@ export const errorMiddleware = (err, req, res, next) => {
           message: err.message
         })
     }
+
+    case ERROR_NAMES.AUTHENTICATION_ERROR: {
+      return res
+        .status(STATUS_CODES.UNAUTHENTICATED)
+        .json({
+          status: STATUS.FAIL,
+          code: STATUS_CODES.UNAUTHENTICATED,
+          errorCode: err.errorCode ?? STATUS_CODES.UNAUTHENTICATED,
+          error: err.error ?? err.message,
+          message: err.message
+        })
+    }
+
+    // case ERROR_NAMES.JSON_WEB_TOKEN_ERROR: {
+    //   const error = ERROR_MESSAGES[err.message]
+    //   return res
+    //     .status(STATUS_CODES.BAD_REQUEST)
+    //     .json({
+    //       status: STATUS.FAIL,
+    //       code: STATUS_CODES.BAD_REQUEST,
+    //       errorCode: STATUS_CODES.UNAUTHENTICATED,
+    //       error: error,
+    //       message: `${err.type} ${JWT_MESSAGES[err.message]}`
+    //     })
+    // }
 
   }
   return res.status(500).send('Error from server')
