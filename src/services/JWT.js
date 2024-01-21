@@ -6,15 +6,15 @@ import {
   REFRESH_TOKEN_DURATION
 } from '../configs/index.js'
 
-/**@type {import('.').JWTService} */
+/**@type {import('../types').JWTService} */
 export const JWTService = {
 
   generateAccessToken: (payload) => {
-    return jwt.sign(payload, privateKey, { expiresIn: ACCESS_TOKEN_DURATION, algorithm: 'rs256' })
+    return jwt.sign(payload, privateKey, { expiresIn: ACCESS_TOKEN_DURATION, algorithm: 'RS256' })
   },
 
   generateRefreshToken: (payload) => {
-    return jwt.sign(payload, privateKey, { expiresIn: REFRESH_TOKEN_DURATION, algorithm: 'rs256' })
+    return jwt.sign(payload, privateKey, { expiresIn: REFRESH_TOKEN_DURATION, algorithm: 'RS256' })
   },
 
   verifyToken: (token) => {
@@ -26,5 +26,3 @@ export const JWTService = {
     }
   }
 }
-
-export { JWTService }

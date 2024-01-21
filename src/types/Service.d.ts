@@ -1,18 +1,32 @@
 type Payload = { userId: Number }
 
+
+type File = {
+  fieldname: String,
+  originalname: String,
+  encoding: String,
+  mimetype: String,
+  fileType: 'images' | 'videos' | 'others',
+  extension: String,
+  destination: String,
+  filename: String,
+  path: String,
+  size: Number
+}
 type ServiceProps = {
   body: Object,
   params: Object,
   query: Object,
   payload: Payload,
-  file: any,
-  files: any,
+  file: File,
+  files: File[],
 }
 
 type ServiceResult = {
-  result: 'SUCCESS' | 'FAIL',
-  statusCode: Number,
+  status: 'SUCCESS' | 'FAIL',
   code: Number,
+  statusCode: Number,
+  error: String,
   errorCode: Number,
   message: String,
   rest: any

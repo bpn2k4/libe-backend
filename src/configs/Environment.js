@@ -1,8 +1,11 @@
 import dotenv from 'dotenv'
+import { resolve } from 'path'
 import { Logger } from '../helpers/index.js'
 
 dotenv.config()
 
+
+export const ROOT = resolve('.')
 // port for app running
 export const PORT = process.env.PORT ?? '8000'
 

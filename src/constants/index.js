@@ -1,13 +1,39 @@
 export const STATUS_CODES = {
-  BAD_REQUEST: 400
+  SUCCESS: 200,
+  CREATED: 201,
+  BAD_REQUEST: 400,
+  NOT_FOUND: 404,
+
+  CONFLICT: 409
 }
 
-export const MESSAGES = {
-  INVALID_PARAMETER: 'Invalid parameter'
+export const ERROR_MESSAGES = {
+  INVALID_PARAMETER: 'Invalid parameter',
+  EXISTED: 'Resource already exists'
 }
 
 export const ERROR_NAMES = {
-  VALIDATION_ERROR: 'ValidationError'
+  VALIDATION_ERROR: 'ValidationError',
+  MULTER_ERROR: 'MulterError',
+  FILE_FILTER_ERROR: 'FileFilterError',
+  RESOURCE_EXISTED_ERROR: 'ResourceExistedError'
+}
+
+export const MULTER_ERROR = {
+  LIMIT_UNEXPECTED_FILE: 'LIMIT_UNEXPECTED_FILE',
+
+  LIMIT_PART_COUNT: 'LIMIT_PART_COUNT',
+  LIMIT_FILE_SIZE: 'LIMIT_FILE_SIZE',
+  LIMIT_FILE_COUNT: 'LIMIT_FILE_COUNT',
+  LIMIT_FIELD_KEY: 'LIMIT_FIELD_KEY',
+  LIMIT_FIELD_VALUE: 'LIMIT_FIELD_VALUE',
+  LIMIT_FIELD_COUNT: 'LIMIT_FIELD_COUNT',
+  MISSING_FIELD_NAME: 'MISSING_FIELD_NAME',
+}
+
+export const STATUS = {
+  SUCCESS: 'SUCCESS',
+  FAIL: 'FAIL'
 }
 
 export const GENDER = {

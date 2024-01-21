@@ -4,7 +4,7 @@ import { GENDER } from '../constants/index.js'
 
 const options = { abortEarly: false }
 
-/**@type {import('.').AuthValidator} */
+/**@type {import('../types').AuthValidator} */
 export const AuthValidator = {
 
   validateRegisterForm: (body) => {
