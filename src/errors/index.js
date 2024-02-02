@@ -52,3 +52,13 @@ export class AuthenticationError extends Error {
     Error.captureStackTrace(this, this.constructor)
   }
 }
+
+export class AuthorizationError extends Error {
+  constructor(message = '', error = '', errorCode = 0) {
+    super(message)
+    this.name = ERROR_NAMES.AUTHORIZATION_ERROR
+    this.error = error
+    this.errorCode = errorCode
+    Error.captureStackTrace(this, this.constructor)
+  }
+}

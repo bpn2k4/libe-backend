@@ -66,7 +66,7 @@
 								},
 								{
 									"key": "username",
-									"value": "taolaphu2",
+									"value": "taolaphu3",
 									"type": "text"
 								},
 								{
@@ -77,7 +77,8 @@
 								{
 									"key": "avatar",
 									"type": "file",
-									"src": "/C:/Users/admin/Pictures/zyro-image.png"
+									"src": "/C:/Users/admin/Pictures/zyro-image.png",
+									"disabled": true
 								}
 							]
 						},
@@ -91,6 +92,101 @@
 								"v1",
 								"auth",
 								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refreshToken",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcwNTgxMTkwNywiZXhwIjoxNzA1ODk4MzA3fQ.Wi06MB7dJar9pOwmdM3ia9j1NmQqZdw8_jNaHlKyNrHbPHTL0z-skVxs_ic2m7b6Ckch25KH-3xsFi2805XdqJgmYVBblbfBvCjUlA9jQNJpoHcIgintFbMtzHnP85ZRonUErz-bASOguvpV1rTvxtlIR-IOtqUKjUiOCmTv3Sd-j0VhcMthZycKbiqa7caOYgBfZdgVTj64nS7TgHWapx3qFz6CsDW4axRQ6f5EDqh1mP3TqmPjCKb5qw6I__JqlL-xZNiY3jldc0EfUpaOwbhcWC8IUCVaN2iu_WSCGAvgfV0kB-gnCOM9fUbjL0Tv7e5n9OXj41IyX9p9y3eZjMBVIobe_XBrvaXXEyU0CZeUqm-YPQt5xSgC5j9lxYbQnqRBsTftCpHqMZRQYljk5pMiW0qIBPWOZJldDMjI3IDu9gEppWrOYnwT7a94ICTEpO2aAqFWom97DCFZ9qwarwl0ZyHVxSc00UMmBn4-DIyKSz6iQE7nmBUyL2LxJV52wwYsHyPCMFjzd7ajkFXB7Qrl06BUbOO7S8fxWKWwK2h5h8OiGVAc1-OgTcpES82JRLyw59HGL3qoufHI1C5FfIPscIeS_lZjgdMNd9mMTp8up87f_PqGqc2uvbrDuuVDlJ0TGmXmluWahHf4W1iIQn2E6uCqRL8hsUAHuJ7hv8o",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/refresh-token",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "taolaphu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12321313",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "test author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcwNjg4NDgyOSwiZXhwIjoxNzA2ODg0ODg5fQ.SrvTwfjVg22Ol5rG1kPbXDAmrCQFNTdzNMZO9IKn2VPnYSdS417gkmKDn4ehe_7-9hQ7OB4SXnOHK5w4l3oCz-BmCgZ2wrH4KFBknSzRr80Fsd5NbuqaOXpgrHAADyfPpD2mTLmNsXUa6km8NQ09hcOlwsYiYDL4k5zpUQ78yWKR8jN0_tNqEntI8McvmtFUNj4ftRha0dXFUvX6p_9nmZtm59YuKcDG-odp8hFWB_Ehkb-YumgUo6bzL7rLk8hSexnYQbVTmSW7zkpKmsaWsIWzkVX69pYgafeIOLbzUuLlYPQBZKrw8zK3EQplNq8uynPba4krk7gY-wgTuwYKEduBllCuGX3ThzbbLLNUx7kqu5ai_jqN720fEK4El3-h7ph8gs9iPS76qz1FCXXH-2ClwQtUVaB4_ulgjeZigONTv7j0hMyuS_cOtCh0y6bHfTC-ulXue_3SZTgK2x9t32TvVZVrckRlwdZl2pviehb3gQbDUf-M-lkEAjrdm_3sZBDQxzUaqaBnb437fZhE50Q_c-8N_zciZi2OxgiqMgEgw89VU_r12z_xFHpSd3IdZFWK-eiqPLO2FVu5dH4jkFdgcf7Nk-dEqJkaOEEU97LBfe6oekSlUCHoXqswgKmmMOeSzeP4ntPEzGeoEzdGIVMPtz6l2ILvTsGvNYcYA48",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/v1/auth/test",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"test"
 							]
 						}
 					},
@@ -157,7 +253,7 @@
 	"variable": [
 		{
 			"key": "HOST",
-			"value": "",
+			"value": "http://localhost:8000",
 			"type": "string"
 		}
 	]

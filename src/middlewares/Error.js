@@ -89,6 +89,18 @@ export const errorMiddleware = (err, req, res, next) => {
         })
     }
 
+    case ERROR_NAMES.AUTHORIZATION_ERROR: {
+      return res
+        .status(STATUS_CODES.UNAUTHENTICATED)
+        .json({
+          status: STATUS.FAIL,
+          code: STATUS_CODES.UNAUTHENTICATED,
+          errorCode: err.errorCode ?? STATUS_CODES.UNAUTHENTICATED,
+          error: ERROR_MESSAGES.NOT_ALLOW ?? err.error ?? err.message,
+          message: err.message
+        })
+    }
+
     // case ERROR_NAMES.JSON_WEB_TOKEN_ERROR: {
     //   const error = ERROR_MESSAGES[err.message]
     //   return res

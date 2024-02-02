@@ -1,3 +1,4 @@
+import { ROLES } from '../constants/index.js'
 import {
   BOOLEAN,
   DATE,
@@ -57,6 +58,16 @@ const User = sql.define('User', {
     allowNull: false,
     defaultValue: USER.gender.DEFAULT
   },
+  role: {
+    type: STRING(15),
+    allowNull: false,
+    defaultValue: ROLES.DEFAULT
+  },
+  isLock: {
+    type: BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
 }, {
   tableName: 'tb.user',
   timestamps: true,

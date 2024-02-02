@@ -19,7 +19,6 @@ export const JWTService = {
   },
 
   verifyToken: (token) => {
-    console.log(publicKey);
     try {
       const data = jwt.verify(token, publicKey, { algorithms: 'RS256' })
       return { data }

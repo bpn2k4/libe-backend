@@ -16,7 +16,8 @@ export const ERROR_MESSAGES = {
   NOT_FOUND: 'Resource not found',
   WRONG_PASSWORD: 'Wrong password',
   INVALID_TOKEN: 'Invalid token',
-  TOKEN_EXPIRED: 'Token expired'
+  TOKEN_EXPIRED: 'Token expired',
+  NOT_ALLOW: 'Not allow',
 }
 
 export const ERROR_NAMES = {
@@ -62,4 +63,13 @@ export const GENDER = {
   FEMALE: 'FEMALE',
   OTHER: 'OTHER',
   UNSET: 'UNSET'
+}
+
+export const ROLES = {
+  SUPPER_ADMIN: 'SUPPER_ADMIN',
+  ADMIN: 'ADMIN',
+  MANAGER: 'MANAGER',
+  STAFF: 'STAFF',
+  MEMBER: 'MEMBER',
+  DEFAULT: 'DEFAULT',
 }

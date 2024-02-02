@@ -6,7 +6,7 @@ import { AuthValidator } from '../validations/Auth.js'
 import { JWTService } from './JWT.js'
 
 /**@type {import('../types').HandlerService} */
-const register = async ({ body, files }) => {
+const register = async ({ body, files = [] }) => {
   const avatar = files[0] ? files[0].path.split('\\').join('/') : undefined
   const { value, error } = AuthValidator.validateRegisterForm(body)
   if (error) throw error

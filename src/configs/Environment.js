@@ -20,6 +20,6 @@ export const SQL_DATABASE_PASSWORD = process.env.SQL_DATABASE_PASSWORD ?? '12345
 // token config
 export const PUBLIC_KEY_PATH = process.env.PUBLIC_KEY_PATH
 export const PRIVATE_KEY_PATH = process.env.PRIVATE_KEY_PATH
-export const ACCESS_TOKEN_DURATION = process.env.ACCESS_TOKEN_DURATION ?? '15s'
+export const ACCESS_TOKEN_DURATION = process.env.ACCESS_TOKEN_DURATION ?? '60s'
 export const REFRESH_TOKEN_DURATION = process.env.REFRESH_TOKEN_DURATION ?? '1d'
 
