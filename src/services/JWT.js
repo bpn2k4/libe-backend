@@ -23,9 +23,8 @@ export const JWTService = {
       const data = jwt.verify(token, publicKey, { algorithms: 'RS256' })
       return { data }
     } catch (error) {
-      const message = error.message == 'jwt expired' ? JWT_ERROR.TOKEN_EXPIRED : JWT_ERROR.INVALID_TOKEN
-      const name = ERROR_NAMES.JSON_WEB_TOKEN_ERROR
-      return { error: { message, name } }
+      const name = error.message == 'jwt expired' ? JWT_ERROR.TOKEN_EXPIRED : JWT_ERROR.INVALID_TOKEN
+      return { error: { name } }
     }
   }
 }

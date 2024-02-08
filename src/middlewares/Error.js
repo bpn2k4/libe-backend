@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import { ERROR_MESSAGES, ERROR_NAMES, JWT_MESSAGES, MULTER_ERROR, STATUS, STATUS_CODES } from '../constants/index.js'
+import { ERROR_MESSAGES, ERROR_NAMES, MULTER_ERROR, STATUS, STATUS_CODES } from '../constants/index.js'
 import { ROOT } from '../configs/index.js'
 
 
@@ -13,26 +13,25 @@ export const errorMiddleware = (err, req, res, next) => {
       try {
         console.log(path.join(ROOT, file.path))
         fs.unlink(path.join(ROOT, file.path), (e) => 1)
-      } catch (error) {
-        console.log("t", error)
-      }
+      } catch (error) { console.log("t", error) }
     }
   }
   switch (err.name) {
+    case (ERROR_NAMES.AUTHENTICATION_ERROR):
+    case (ERROR_NAMES.AUTHORIZATION_ERROR):
+    case (ERROR_NAMES.FILE_FILTER_ERROR):
+    case (ERROR_NAMES.NOT_FOUND_RESOURCE_ERROR):
+    case (ERROR_NAMES.RESOURCE_EXISTED_ERROR):
+    case (ERROR_NAMES.VALIDATION_ERROR):
+      return res.status(err.code).json({
+        result: STATUS.FAIL,
+        code: err.code,
+        error: err.error,
+        errorCode: err.errorCode,
+        message: err.message
+      })
 
-    case ERROR_NAMES.VALIDATION_ERROR: {
-      return res
-        .status(STATUS_CODES.BAD_REQUEST)
-        .json({
-          status: STATUS.FAIL,
-          code: STATUS_CODES.BAD_REQUEST,
-          errorCode: STATUS_CODES.BAD_REQUEST,
-          error: ERROR_MESSAGES.INVALID_PARAMETER,
-          message: err.message
-        })
-    }
-
-    case ERROR_NAMES.MULTER_ERROR: {
+    case ERROR_NAMES.MULTER_ERROR:
       switch (err.code) {
         case MULTER_ERROR.LIMIT_UNEXPECTED_FILE:
           const isMultiFile = req.files ? req.files.length > 0 : false
@@ -45,75 +44,11 @@ export const errorMiddleware = (err, req, res, next) => {
               error: ERROR_MESSAGES.INVALID_PARAMETER,
               message: isMultiFile ? `Limited number files` : `"${err.field}" is not allowed`,
             })
-
         default:
           break;
       }
-    }
-
-    /** Error when file upload is wrong format */
-    case ERROR_NAMES.FILE_FILTER_ERROR: {
-      return res
-        .status(STATUS_CODES.BAD_REQUEST)
-        .json({
-          status: STATUS.FAIL,
-          code: STATUS_CODES.BAD_REQUEST,
-          errorCode: STATUS_CODES.BAD_REQUEST,
-          error: ERROR_MESSAGES.INVALID_PARAMETER,
-          message: `"${err.field}" only accept ${err.allow.join(', ')}`
-        })
-    }
-
-    /** Error when create new resource that have been existed */
-    case ERROR_NAMES.RESOURCE_EXISTED_ERROR: {
-      return res
-        .status(STATUS_CODES.BAD_REQUEST)
-        .json({
-          status: STATUS.FAIL,
-          code: STATUS_CODES.BAD_REQUEST,
-          errorCode: STATUS_CODES.CONFLICT,
-          error: ERROR_MESSAGES.EXISTED,
-          message: err.message
-        })
-    }
-
-    case ERROR_NAMES.AUTHENTICATION_ERROR: {
-      return res
-        .status(STATUS_CODES.UNAUTHENTICATED)
-        .json({
-          status: STATUS.FAIL,
-          code: STATUS_CODES.UNAUTHENTICATED,
-          errorCode: err.errorCode ?? STATUS_CODES.UNAUTHENTICATED,
-          error: err.error ?? err.message,
-          message: err.message
-        })
-    }
-
-    case ERROR_NAMES.AUTHORIZATION_ERROR: {
-      return res
-        .status(STATUS_CODES.UNAUTHENTICATED)
-        .json({
-          status: STATUS.FAIL,
-          code: STATUS_CODES.UNAUTHENTICATED,
-          errorCode: err.errorCode ?? STATUS_CODES.UNAUTHENTICATED,
-          error: ERROR_MESSAGES.NOT_ALLOW ?? err.error ?? err.message,
-          message: err.message
-        })
-    }
-
-    // case ERROR_NAMES.JSON_WEB_TOKEN_ERROR: {
-    //   const error = ERROR_MESSAGES[err.message]
-    //   return res
-    //     .status(STATUS_CODES.BAD_REQUEST)
-    //     .json({
-    //       status: STATUS.FAIL,
-    //       code: STATUS_CODES.BAD_REQUEST,
-    //       errorCode: STATUS_CODES.UNAUTHENTICATED,
-    //       error: error,
-    //       message: `${err.type} ${JWT_MESSAGES[err.message]}`
-    //     })
-    // }
 
   }
+
   return res.status(500).send('Error from server')
 }

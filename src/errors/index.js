@@ -1,64 +1,73 @@
-import { ERROR_NAMES, STATUS_CODES } from '../constants/index.js'
+import { ERROR_MESSAGES, ERROR_NAMES, STATUS_CODES } from '../constants/index.js'
 
 export class ValidationError extends Error {
-  constructor(message) {
-    super(message)
+  constructor(error) {
+    super(error.message)
+    Error.captureStackTrace(this, this.constructor)
     this.name = ERROR_NAMES.VALIDATION_ERROR
-    Error.captureStackTrace(this, this.constructor)
-  }
-}
-
-export class FileFilterError extends Error {
-  constructor(message = '', field = '', allow = []) {
-    super(message)
-    this.name = ERROR_NAMES.FILE_FILTER_ERROR
-    this.field = field
-    this.allow = allow
-    Error.captureStackTrace(this, this.constructor)
+    this.code = STATUS_CODES.BAD_REQUEST
+    this.error = ERROR_MESSAGES.INVALID_PARAMETER
+    this.errorCode = STATUS_CODES.BAD_REQUEST
+    this.message = error.message
   }
 }
 
 export class ResourceExistedError extends Error {
-  constructor(message = '') {
+  constructor({ code = 400, error = ERROR_MESSAGES.EXISTED, errorCode = 400, message = '' }) {
     super(message)
+    Error.captureStackTrace(this, this.constructor)
     this.name = ERROR_NAMES.RESOURCE_EXISTED_ERROR
-    Error.captureStackTrace(this, this.constructor)
-  }
-}
-
-export class JsonWebTokenError extends Error {
-  constructor(message = '', type = 'AccessToken') {
-    super(message)
-    this.type = type
-    this.name = ERROR_NAMES.JSON_WEB_TOKEN_ERROR
-    Error.captureStackTrace(this, this.constructor)
+    this.code = code
+    this.error = error
+    this.errorCode = errorCode
+    this.message = message
   }
 }
 
 export class NotFoundResourceError extends Error {
-  constructor(message) {
+  constructor({ code = 404, error = ERROR_MESSAGES.INVALID_PARAMETER, errorCode = 404, message = '' }) {
     super(message)
-    this.name = ERROR_NAMES.NOT_FOUND_RESOURCE_ERROR
     Error.captureStackTrace(this, this.constructor)
+    this.name = ERROR_NAMES.NOT_FOUND_RESOURCE_ERROR
+    this.code = code
+    this.error = error
+    this.errorCode = errorCode
+    this.message = message
+  }
+}
+
+export class FileFilterError extends Error {
+  constructor({ code = 400, error = '', errorCode = 400, message = '', field = '', allow = [] }) {
+    super(message)
+    Error.captureStackTrace(this, this.constructor)
+    this.name = ERROR_NAMES.FILE_FILTER_ERROR
+    this.code = code
+    this.error = error
+    this.errorCode = errorCode
+    this.message = `"${field} only accepts ${allow.join(', ')}"`
   }
 }
 
 export class AuthenticationError extends Error {
-  constructor(message = '', error = '', errorCode = 0) {
+  constructor({ code = 401, error = '', errorCode = 401, message = '' }) {
     super(message)
+    Error.captureStackTrace(this, this.constructor)
     this.name = ERROR_NAMES.AUTHENTICATION_ERROR
+    this.code = code
     this.error = error
     this.errorCode = errorCode
-    Error.captureStackTrace(this, this.constructor)
+    this.message = message
   }
 }
 
 export class AuthorizationError extends Error {
-  constructor(message = '', error = '', errorCode = 0) {
+  constructor({ code = 401, error = '', errorCode = 401, message = '' }) {
     super(message)
+    Error.captureStackTrace(this, this.constructor)
     this.name = ERROR_NAMES.AUTHORIZATION_ERROR
+    this.code = code
     this.error = error
     this.errorCode = errorCode
-    Error.captureStackTrace(this, this.constructor)
+    this.message = message
   }
 }
