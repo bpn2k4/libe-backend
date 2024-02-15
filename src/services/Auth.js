@@ -86,7 +86,12 @@ const refreshToken = async ({ body }) => {
   }).validate(body, { abortEarly: false })
   if (error) throw new ValidationError(error)
   const { data, error: error_ } = JWTService.verifyToken(value.refreshToken)
-  if (error_) throw new AuthenticationError({ error: ERROR_MESSAGES[error_.name], message: `RefreshToken is ${JWT_MESSAGES[error_.name]}` })
+  if (error_) {
+    throw new AuthenticationError({
+      error: ERROR_MESSAGES[error_.name],
+      message: `RefreshToken is ${JWT_MESSAGES[error_.name]}`
+    })
+  }
   delete data.iat
   delete data.exp
   const token = JWTService.generateAccessToken(data)

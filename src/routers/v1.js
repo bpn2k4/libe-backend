@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { AuthController } from '../controllers/index.js'
+import { AuthController, CollectionController } from '../controllers/index.js'
 import { uploadFile, authentication, authorization } from '../middlewares/index.js'
 import { ROLES } from '../constants/index.js'
 
@@ -19,5 +19,8 @@ router.post('/auth/login', AuthController.login)
 router.post('/auth/refresh-token', AuthController.refreshToken)
 
 router.post('/auth/test', authentication, authorization(DEFAULT), async (req, res) => res.status(200).send('ok'))
+
+router.post('/collection', CollectionController.createCollection)
+router.get('/collection', CollectionController.getListCollection)
 
 export { router as V1 }

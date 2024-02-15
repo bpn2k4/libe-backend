@@ -73,3 +73,8 @@ export const ROLES = {
   MEMBER: 'MEMBER',
   DEFAULT: 'DEFAULT',
 }
+
+export const ORDER = {
+  DESC: 'desc',
+  ASC: 'asc'
+}

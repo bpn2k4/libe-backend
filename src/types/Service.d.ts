@@ -23,13 +23,7 @@ type ServiceProps = {
 }
 
 type ServiceResult = {
-  status: 'SUCCESS' | 'FAIL',
-  code: Number,
-  statusCode: Number,
-  error: String,
-  errorCode: Number,
-  message: String,
-  rest: any
+  data: any
 }
 
 /** Service for handle request from controller */

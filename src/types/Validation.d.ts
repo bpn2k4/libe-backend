@@ -17,6 +17,23 @@ export type AuthValidator = {
   validateLoginForm: (data: any) => { value: LoginForm, error?: ValidationError },
 }
 
+type CreateCollectionForm = {
+  name: String,
+  description: String,
+  hex: String,
+  productIds: Number[],
+}
+
+type GetListCollectionQuery = {
+  page: Number,
+  limit: Number,
+  q: String,
+  totalProduct: Boolean,
+  products: Boolean,
+  sortBy: String,
+  order: String
+}
 export type CollectionValidator = {
-  validateCreateCollectionForm: () => {}
+  validateCreateCollectionForm: (data: any) => { value: CreateCollectionForm, error?: ValidationError }
+  validateGetListCollectionQuery: (data: any) => { value: GetListCollectionQuery, error?: ValidationError }
 }
