@@ -1,0 +1,29 @@
+here is my postman test api
+
+curl --location 'http://localhost:8000/api/v1/auth/register' \
+--form 'fullName="12313"' \
+--form 'username="taolaphu35"' \
+--form 'password="12321313"' \
+--form 'avatar=@"/C:/Users/admin/Downloads/1.jpg"'
+
+and this response:
+{
+    "result": "SUCCESS",
+    "user": {
+        "phoneVerified": false,
+        "emailVerified": false,
+        "gender": "UNSET",
+        "role": "DEFAULT",
+        "isLock": false,
+        "userId": 7,
+        "fullName": "12313",
+        "username": "taolaphu35",
+        "avatar": "uploads/images/b7ef3116703f4d21b1e981ddc2cb108f_1.jpg",
+        "updatedAt": "2024-02-15T12:31:17.518Z",
+        "createdAt": "2024-02-15T12:31:17.518Z",
+        "accessToken": "12321",
+        "refreshToken": "1232131"
+    }
+}
+
+help me to create a swagger json for this api, include example to body and response, use javascript variable to this json like: const swagger = {swagger: "2.0", ...}
