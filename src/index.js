@@ -3,7 +3,6 @@ import express from 'express'
 import cors from 'cors'
 import { resolve } from 'path'
 import morgan from 'morgan'
-import swaggerUi from 'swagger-ui-express'
 
 import { PORT } from './configs/index.js'
 import { Helper, Logger } from './helpers/index.js'
@@ -11,9 +10,6 @@ import { V1 } from './routers/v1.js'
 import { sql } from './databases/index.js'
 import { initModel } from './models/index.js'
 import { errorMiddleware, uploadFile } from './middlewares/index.js'
-import { swagger } from './docs/index.js'
-
-console.log(swagger);
 
 const boost = async () => {
 
@@ -35,7 +31,6 @@ const boost = async () => {
   app.use(express.urlencoded({ extended: true }))
   app.use(cors())
   app.use(morgan('dev'))
-  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swagger))
 
   app.get('/health/ping', (req, res) => {
     return res.status(200).send('PONG')
@@ -44,8 +39,8 @@ const boost = async () => {
     return res.status(200).send('OK')
   })
 
-  await sql.authenticate()
-  await sql.sync()
+  // await sql.authenticate()
+  // await sql.sync()
 
   app.use('/api/v1', V1)
 
@@ -56,14 +51,13 @@ const boost = async () => {
   })
 
   app.use('/uploads', express.static(resolve('./uploads')))
-  // app.use('*', (req, res) => {
-  //   // throw new Error('Test')
-  //   res.status(200).send('<h1>Hello World</h1>')
-  // })
+  app.use('*', (req, res) => {
+    res.status(200).send('<h1>Hello World</h1>')
+  })
   app.use(errorMiddleware)
 
   app.listen(PORT, () => {
-    console.log('App is running at', `\x1b[32m http://localhost:${PORT}/docs \x1b[0m`)
+    console.log('App is running at', `\x1b[32m http://localhost:${PORT} \x1b[0m`)
   })
 }
 
