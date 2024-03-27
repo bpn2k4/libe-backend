@@ -33,7 +33,12 @@ type GetListCollectionQuery = {
   sortBy: String,
   order: String
 }
+
+type DeleteListCollectionBody = {
+  collectionIds: number[]
+}
 export type CollectionValidator = {
   validateCreateCollectionForm: (data: any) => { value: CreateCollectionForm, error?: ValidationError }
-  validateGetListCollectionQuery: (data: any) => { value: GetListCollectionQuery, error?: ValidationError }
+  validateGetListCollectionQuery: (data: any) => { value: GetListCollectionQuery, error?: ValidationError },
+  validateDeleteListCollectionBody: (data: any) => { value: DeleteListCollectionBody, error?: ValidationError },
 }

@@ -22,5 +22,6 @@ router.post('/auth/test', authentication, authorization(DEFAULT), async (req, re
 
 router.post('/collection', CollectionController.createCollection)
 router.get('/collection', CollectionController.getListCollection)
+router.delete('/collection', CollectionController.deleteCollection)
 
 export { router as V1 }

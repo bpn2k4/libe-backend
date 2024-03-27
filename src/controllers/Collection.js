@@ -33,7 +33,8 @@ const getListCollection = async (req, res, next) => {
 /**@type {import("../types").HandlerFunction} */
 const deleteCollection = async (req, res, next) => {
   try {
-    return res.status(200).send('hello')
+    const data = await CollectionService.deleteListCollection({ body: req.body })
+    return res.status(STATUS_CODES.SUCCESS).json({ result: STATUS.SUCCESS, ...data })
   } catch (error) { next(error) }
 }
 

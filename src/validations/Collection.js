@@ -24,5 +24,12 @@ export const CollectionValidator = {
       order: Joi.string()
     })
     return schema.validate(data, { abortEarly: false })
+  },
+
+  validateDeleteListCollectionBody: (data) => {
+    const schema = Joi.object({
+      collectionIds: Joi.array().items(Joi.number().integer().min(1)).min(1).required()
+    })
+    return schema.validate(data, { abortEarly: false })
   }
 }
