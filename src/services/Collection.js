@@ -66,9 +66,32 @@ const deleteListCollection = async ({ body }) => {
   }
 }
 
+/**@type {import('../types').HandlerService} */
+const getOneCollection = async ({ params, query }) => {
+
+}
+
+/**@type {import('../types').HandlerService} */
+const updateCollection = async ({ params, body }) => {
+  console.log("params", params)
+  console.log("body", body)
+  const { paramsValue, bodyValue, error } = CollectionValidator.validateUpdateCollectionParamsAndBody(params, body)
+  if (error) throw new ValidationError(error)
+  const collection = await Collection.findOne({
+    where: {
+      collectionId: paramsValue.collectionId
+    },
+    paranoid: true
+  })
+  if (!collection) throw new NotFoundResourceError({ message: `Collection id [${paramsValue.collectionId}] is not found` })
+  const updatedCollection = await collection.update({ ...bodyValue })
+  return { collection: updatedCollection }
+}
+
 
 export const CollectionService = {
   createCollection,
   getListCollection,
-  deleteListCollection
+  deleteListCollection,
+  updateCollection
 }

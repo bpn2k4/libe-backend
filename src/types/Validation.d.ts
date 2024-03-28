@@ -37,8 +37,19 @@ type GetListCollectionQuery = {
 type DeleteListCollectionBody = {
   collectionIds: number[]
 }
+
+type UpdateCollectionParams = {
+  collectionId: number
+}
+type UpdateCollectionBody = {
+  name: String,
+  description: String,
+  hex: String,
+}
+
 export type CollectionValidator = {
   validateCreateCollectionForm: (data: any) => { value: CreateCollectionForm, error?: ValidationError }
   validateGetListCollectionQuery: (data: any) => { value: GetListCollectionQuery, error?: ValidationError },
   validateDeleteListCollectionBody: (data: any) => { value: DeleteListCollectionBody, error?: ValidationError },
+  validateUpdateCollectionParamsAndBody: (params: any, body: any) => { paramsValue: UpdateCollectionParams, bodyValue: UpdateCollectionBody, error?: ValidationError },
 }

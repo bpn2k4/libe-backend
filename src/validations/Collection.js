@@ -31,5 +31,24 @@ export const CollectionValidator = {
       collectionIds: Joi.array().items(Joi.number().integer().min(1)).min(1).required()
     })
     return schema.validate(data, { abortEarly: false })
+  },
+
+  validateUpdateCollectionParamsAndBody: (params, body) => {
+    const paramsSchema = Joi.object({
+      collectionId: Joi.number().integer().min(1).required()
+    })
+    const bodySchema = Joi.object({
+      name: Joi.string(),
+      color: Joi.string().length(6).hex(),
+      description: Joi.string()
+    }).or('name', 'color', 'description').messages({
+      'object.missing': 'Body must have at least one field in [name, color, description]'
+    })
+    const { value: paramsValue, error: paramsError } = paramsSchema.validate(params, { abortEarly: false })
+    console.log("paramsValue", paramsValue);
+    if (paramsError) return { error: paramsError }
+    const { value: bodyValue, error: bodyError } = bodySchema.validate(body, { abortEarly: false })
+    if (bodyError) return { error: bodyError }
+    return { paramsValue, bodyValue, error: undefined }
   }
 }
