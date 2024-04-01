@@ -7,7 +7,7 @@ export const CollectionValidator = {
     const schema = Joi.object({
       name: Joi.string().required(),
       color: Joi.string().length(6).hex(),
-      description: Joi.string(),
+      description: Joi.string().allow(''),
       productIds: Joi.array().items(Joi.number().integer().min(1))
     })
     return schema.validate(data, { abortEarly: false })
@@ -40,7 +40,7 @@ export const CollectionValidator = {
     const bodySchema = Joi.object({
       name: Joi.string(),
       color: Joi.string().length(6).hex(),
-      description: Joi.string()
+      description: Joi.string().allow('')
     }).or('name', 'color', 'description').messages({
       'object.missing': 'Body must have at least one field in [name, color, description]'
     })

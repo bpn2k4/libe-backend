@@ -31,6 +31,7 @@ const getListCollection = async ({ query }) => {
     offset: value.page * value.limit,
     paranoid: true,
   })
+  collections.forEach(item => { item.dataValues.totalProduct = 0 })
   return { total, collections }
 }
 
