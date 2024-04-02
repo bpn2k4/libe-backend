@@ -1,14 +1,8 @@
-import { ROLES } from '../constants/index.js'
-import {
-  BOOLEAN,
-  DATE,
-  INTEGER,
-  STRING,
-  sql
-} from '../databases/index.js'
-import { USER } from '../schemas/index.js'
+import { STRING, BOOLEAN, DATE, INTEGER } from 'sequelize'
+import { GENDER, ROLE } from '../constants/index.js'
+import { sql } from '../databases/index.js'
 
-const User = sql.define('User', {
+export const User = sql.define('User', {
   userId: {
     primaryKey: true,
     type: INTEGER,
@@ -24,26 +18,26 @@ const User = sql.define('User', {
     allowNull: true
   },
   fullName: {
-    type: String,
+    type: STRING,
     allowNull: true
   },
   phone: {
     type: STRING(10),
     allowNull: true
   },
-  phoneVerified: {
+  isPhoneVerified: {
     type: BOOLEAN,
     allowNull: false,
-    defaultValue: USER.phoneVerified.DEFAULT
+    defaultValue: false
   },
   email: {
     type: STRING,
     allowNull: true,
   },
-  emailVerified: {
+  isEmailVerified: {
     type: BOOLEAN,
     allowNull: false,
-    defaultValue: USER.emailVerified.DEFAULT
+    defaultValue: false
   },
   birthday: {
     type: DATE,
@@ -56,14 +50,23 @@ const User = sql.define('User', {
   gender: {
     type: STRING,
     allowNull: false,
-    defaultValue: USER.gender.DEFAULT
+    defaultValue: GENDER.UNSET
   },
   role: {
     type: STRING(15),
     allowNull: false,
-    defaultValue: ROLES.DEFAULT
+    defaultValue: ROLE.DEFAULT
   },
-  isLock: {
+  defaultAddressId: {
+    type: INTEGER,
+    allowNull: true
+  },
+  isLocked: {
+    type: BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  isDeleted: {
     type: BOOLEAN,
     allowNull: false,
     defaultValue: false
@@ -71,7 +74,6 @@ const User = sql.define('User', {
 }, {
   tableName: 'tb.user',
   timestamps: true,
-  paranoid: true
+  paranoid: true,
+  initialAutoIncrement: '1000001'
 })
-
-export { User }

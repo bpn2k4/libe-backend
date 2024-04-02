@@ -12,8 +12,8 @@ To run this project:
     SQL_DATABASE_USER # Database user. Use to connect to database
     SQL_DATABASE_PASSWORD # Database password. Use to connect to database
     ```
-- Make your config in `.env` file. Eg:
-    ```
+- Change your config in `.env` file. Example:
+    ```ini
     PORT=5000 # App will runs at localhost:5000 or <your-ip>:5000
     SQL_DATABASE_TYPE=postgres # Use postgresql
     SQL_DATABASE_HOST=localhost
