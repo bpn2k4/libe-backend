@@ -21,7 +21,8 @@ const log = (type = LOGGER_TYPES.INFO, ...message) => {
   const hours = String(date.getHours()).padStart(2, '0')
   const minutes = String(date.getMinutes()).padStart(2, '0')
   const seconds = String(date.getSeconds()).padStart(2, '0')
-  const time = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
+  const miliseconds = String(date.getMilliseconds()).padEnd(3, '0')
+  const time = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}:${miliseconds}`
   const output = `${time} [${LOGGER_COLORS[type]}${type}${LOGGER_COLORS.reset}]`
   return console.log(output, ...message)
 }

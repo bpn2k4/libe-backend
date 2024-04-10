@@ -20,7 +20,7 @@ const sql = new Sequelize({
   password: SQL_DATABASE_PASSWORD,
   storage: resolve('./data/sqlite.db'),
   logging: (sql) => {
-    return
+    // return
     const date = new Date()
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -28,9 +28,11 @@ const sql = new Sequelize({
     const hours = String(date.getHours()).padStart(2, '0')
     const minutes = String(date.getMinutes()).padStart(2, '0')
     const seconds = String(date.getSeconds()).padStart(2, '0')
-    const time = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
-    Logger.info('[SQL] ' + sql)
-    fs.appendFileSync(resolve('./data/sql.log'), `${time} ${sql}\n`, { encoding: 'utf-8' })
+    const miliseconds = String(date.getMilliseconds()).padEnd(3, '0')
+    const time = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}:${miliseconds}`
+    const sql_ = sql.replace('Executing (default):', '')
+    Logger.info('[SQL]' + sql_)
+    // fs.appendFileSync(resolve('./data/sql.log'), `${time}${sql_}\n`, { encoding: 'utf-8' })
   },
   dialect: SQL_DATABASE_TYPE,
 })

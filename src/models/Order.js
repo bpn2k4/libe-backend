@@ -71,7 +71,7 @@ export const Status = sql.define('Status', {
     allowNull: false
   }
 }, {
-  tableName: 'tb.order',
+  tableName: 'tb.status',
   timestamps: false,
   paranoid: false
 })

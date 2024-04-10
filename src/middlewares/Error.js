@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import { ERROR_MESSAGES, ERROR_NAMES, MULTER_ERROR, STATUS, STATUS_CODES } from '../constants/index.js'
+import { ERROR_MESSAGES, ERROR_NAME, MULTER_ERROR, STATUS, STATUS_CODES } from '../constants/index.js'
 import { ROOT } from '../configs/index.js'
 
 
@@ -17,12 +17,12 @@ export const errorMiddleware = (err, req, res, next) => {
     }
   }
   switch (err.name) {
-    case (ERROR_NAMES.AUTHENTICATION_ERROR):
-    case (ERROR_NAMES.AUTHORIZATION_ERROR):
-    case (ERROR_NAMES.FILE_FILTER_ERROR):
-    case (ERROR_NAMES.NOT_FOUND_RESOURCE_ERROR):
-    case (ERROR_NAMES.RESOURCE_EXISTED_ERROR):
-    case (ERROR_NAMES.VALIDATION_ERROR):
+    case (ERROR_NAME.AUTHENTICATION_ERROR):
+    case (ERROR_NAME.AUTHORIZATION_ERROR):
+    case (ERROR_NAME.FILE_FILTER_ERROR):
+    case (ERROR_NAME.NOT_FOUND_RESOURCE_ERROR):
+    case (ERROR_NAME.RESOURCE_EXISTED_ERROR):
+    case (ERROR_NAME.VALIDATION_ERROR):
       return res.status(err.code).json({
         result: STATUS.FAIL,
         code: err.code,
@@ -31,7 +31,7 @@ export const errorMiddleware = (err, req, res, next) => {
         message: err.message
       })
 
-    case ERROR_NAMES.MULTER_ERROR:
+    case ERROR_NAME.MULTER_ERROR:
       switch (err.code) {
         case MULTER_ERROR.LIMIT_UNEXPECTED_FILE:
           const isMultiFile = req.files ? req.files.length > 0 : false

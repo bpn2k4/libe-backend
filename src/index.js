@@ -6,9 +6,9 @@ import morgan from 'morgan'
 
 import { PORT } from './configs/index.js'
 import { Helper, Logger } from './helpers/index.js'
-import { V1 } from './routers/v1.js'
+import { V1 } from './routers/index.js'
 import { sql } from './databases/index.js'
-import { initModel } from './models/index.js'
+import { syncDatabase } from './models/index.js'
 import { errorMiddleware, uploadFile } from './middlewares/index.js'
 
 const boost = async () => {
@@ -24,13 +24,17 @@ const boost = async () => {
     await sql.authenticate()
   }
 
-  await initModel()
+  // await syncDatabase()
   const app = express()
 
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   app.use(cors())
   app.use(morgan('dev'))
+  app.use((req, res, next) => {
+    res.setHeader('x-powered-by', 'GPT-3.5-Turbo-instruct')
+    next()
+  })
 
   app.get('/health/ping', (req, res) => {
     return res.status(200).send('PONG')
@@ -43,6 +47,13 @@ const boost = async () => {
   // await sql.sync()
 
   app.use('/api/v1', V1)
+
+  app.get('/test', async (req, res) => {
+
+    return res.status(200).json({
+      data: 0
+    })
+  })
 
   app.post('/api/test', uploadFile.image().single('avatar'), async (req, res) => {
     console.log("file", req.files)

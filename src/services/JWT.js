@@ -5,7 +5,7 @@ import {
   ACCESS_TOKEN_DURATION,
   REFRESH_TOKEN_DURATION
 } from '../configs/index.js'
-import { ERROR_NAMES, JWT_ERROR } from '../constants/index.js'
+import { ERROR_NAME, JWT_ERROR } from '../constants/index.js'
 
 /**@type {import('../types').JWTService} */
 export const JWTService = {

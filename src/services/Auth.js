@@ -1,7 +1,7 @@
 import { ERROR_MESSAGES, JWT_MESSAGES, STATUS_CODES } from '../constants/index.js'
 import { AuthenticationError, ResourceExistedError, ValidationError } from '../errors/index.js'
 import { User } from '../models/index.js'
-import { Op } from '../databases/index.js'
+import { Op } from 'sequelize'
 import { AuthValidator } from '../validations/Auth.js'
 import { JWTService } from './JWT.js'
 import Joi from 'joi'

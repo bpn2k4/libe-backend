@@ -35,6 +35,18 @@ const createAssociation = () => {
     as: 'defaultAddress',
     foreignKey: 'defaultAdressId'
   })
+  Collection.belongsToMany(Product, {
+    as: 'products',
+    through: CollectionProduct,
+    foreignKey: "collectionId",
+    otherKey: "productId",
+  })
+  Product.belongsToMany(Collection, {
+    as: 'collections',
+    through: CollectionProduct,
+    foreignKey: "productId",
+    otherKey: "collectionId",
+  })
 }
 
 const syncDatabase = async (force = false, alter = true) => {

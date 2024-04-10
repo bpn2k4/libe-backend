@@ -77,7 +77,7 @@ export const Variation = sql.define('Variation', {
     allowNull: false,
   },
 }, {
-  tableName: 'tb.attribute',
+  tableName: 'tb.variation',
   timestamps: false,
   paranoid: false,
 })
