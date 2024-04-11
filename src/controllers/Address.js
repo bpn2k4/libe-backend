@@ -17,7 +17,6 @@ const updateProvince = async (req, res, next) => {
 
 const getListDisictInProvince = async (req, res, next) => {
   try {
-    // const data = await AddressService.createCollection({ body: req.body })
     const data = { data: 'ok' }
     return res.status(STATUS_CODES.SUCCESS).json({ result: STATUS.SUCCESS, ...data })
   } catch (error) { next(error) }
