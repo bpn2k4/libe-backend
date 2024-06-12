@@ -10,6 +10,11 @@ import { V1 } from './routers/index.js'
 import { sql } from './databases/index.js'
 import { syncDatabase } from './models/index.js'
 import { errorMiddleware, uploadFile } from './middlewares/index.js'
+import { Client } from '@elastic/elasticsearch'
+
+const elasticsearch = new Client({
+  node: "http://192.168.150.128:9200",
+})
 
 const boost = async () => {
 
@@ -50,8 +55,17 @@ const boost = async () => {
 
   app.get('/test', async (req, res) => {
 
+    const data = await elasticsearch.search({
+      index: 'bkgpt',
+      query: {
+        match: {
+          text: "Tạ Hải Tùng"
+        }
+      }
+    })
+
     return res.status(200).json({
-      data: 0
+      data: data
     })
   })
 
