@@ -1,0 +1,17 @@
+
+export const DOCUMENT_STATUS = {
+  EXTRACTED: 'EXTRACTED',
+  PROCESSING: 'PROCESSING',
+  ERROR: 'ERROR',
+  CREATED: 'CREATED'
+}
+
+export const DOCUMENT_CHUNKING_METHOD = {
+  STRUCT: 'STRUCT',
+  TREE: 'TREE'
+}
+
+export const MESSAGE_ROLE = {
+  SYSTEM: 'SYSTEM',
+  USER: 'USER',
+}

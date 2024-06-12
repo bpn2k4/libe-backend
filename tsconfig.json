@@ -1,0 +1,56 @@
+{
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  },
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "paths": {
+      "@configs": [
+        "src/configs/index.ts"
+      ],
+      "@controllers": [
+        "src/controllers/index.ts"
+      ],
+      "@databases": [
+        "src/databases/index.ts"
+      ],
+      "@errors": [
+        "src/errors/index.ts"
+      ],
+      "@middlewares": [
+        "src/middlewares/index.ts"
+      ],
+      "@models": [
+        "src/models/index.ts"
+      ],
+      "@routers": [
+        "src/routers/index.ts"
+      ],
+      "@services": [
+        "src/services/index.ts"
+      ],
+      "@sockets": [
+        "src/sockets/index.ts"
+      ],
+      "@utils": [
+        "src/utils/index.ts"
+      ],
+      "@validations": [
+        "src/validations/index.ts"
+      ],
+    }
+  }
+}
