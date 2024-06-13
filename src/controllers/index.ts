@@ -1,4 +1,5 @@
 import AuthController from './Auth'
+import PlacementController from './Placement'
 
 const tryCatchAsyncHandler = (handlerFunction: any) => (...args: any) => {
   const nextFunction = args[args.length - 1]
@@ -12,5 +13,9 @@ const applyTryCatchAsyncHandler = (controller: any) => {
 }
 
 applyTryCatchAsyncHandler(AuthController)
+applyTryCatchAsyncHandler(PlacementController)
 
-export { AuthController }
+export {
+  AuthController,
+  PlacementController
+}

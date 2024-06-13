@@ -36,6 +36,9 @@
       "@models": [
         "src/models/index.ts"
       ],
+      "@types": [
+        "src/types/index.d.ts"
+      ],
       "@routers": [
         "src/routers/index.ts"
       ],

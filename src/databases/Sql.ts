@@ -1,5 +1,4 @@
-import { Sequelize } from 'sequelize'
-import type { Options } from 'sequelize'
+import { Sequelize, Options } from 'sequelize'
 
 import { ENVIRONMENT } from '@configs'
 
@@ -16,6 +15,7 @@ const otherConfig: Options = {
   password: ENVIRONMENT.SQL_DATABASE_PASSWORD,
   host: ENVIRONMENT.SQL_DATABASE_HOST,
   port: ENVIRONMENT.SQL_DATABASE_PORT,
+  timezone: "+07:00",
   logging: () => 1
 }
 
