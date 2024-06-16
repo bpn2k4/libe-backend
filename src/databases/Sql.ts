@@ -5,7 +5,7 @@ import { ENVIRONMENT } from '@configs'
 const sqliteConfig: Options = {
   dialect: 'sqlite',
   storage: './database.sqlite',
-  logging: () => 1
+  logging: console.log
 }
 
 const otherConfig: Options = {
