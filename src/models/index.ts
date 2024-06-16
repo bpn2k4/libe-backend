@@ -1,15 +1,40 @@
 
+import { sql } from '@databases'
 
-const createAssociation = () => { }
+import { District, Province, Ward } from './Placement'
 
-const initModel = async (alter = true, force = true) => {
+const createAssociation = () => {
+  District.belongsTo(Province, {
+    foreignKey: 'provinceId',
+    as: 'province'
+  })
+  Province.hasMany(District, {
+    foreignKey: 'provinceId',
+    as: 'districts'
+  })
+  Ward.belongsTo(District, {
+    foreignKey: 'districtId',
+    as: 'district'
+  })
+  District.hasMany(Ward, {
+    foreignKey: 'districtId',
+    as: 'wards'
+  })
+
+}
+
+const initModel = async (sync = false, alter = true, force = true) => {
   createAssociation()
-  // return sql.sync({
-  //   alter: alter,
-  //   force: force
-  // })
+  if (sync) {
+    return sql.sync({
+      alter: alter,
+      force: force
+    })
+  }
 }
 
 export {
-  initModel
+  initModel,
+  createAssociation,
+  District, Province, Ward
 }

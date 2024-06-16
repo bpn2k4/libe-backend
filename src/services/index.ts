@@ -1,1 +1,1 @@
-export { default as PlacementService } from './Placement'
+export * as PlacementService from './Placement'

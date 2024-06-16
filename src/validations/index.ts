@@ -1,1 +1,1 @@
-export { default as PlacementValidator } from './Placement'
+export * as PlacementValidator from './Placement'

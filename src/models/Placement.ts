@@ -44,13 +44,13 @@ const Province = sql.define('provinces', {
 }, {
   tableName: 'provinces',
   timestamps: true,
+  initialAutoIncrement: '100001',
   paranoid: true,
-  // indexes: [
-  //   { name: 'province_primary_key', fields: ['provinceId'], unique: true, using: 'BTREE' },
-  //   { name: 'province_name_index', fields: ['name'], type: 'FULLTEXT' },
-  //   { name: 'province_type_index', fields: ['type'] },
-  //   { name: 'province_deleted_index', fields: ['deleted'] }
-  // ]
+  indexes: [
+    { name: 'province_name_index', fields: ['name'], type: 'FULLTEXT' },
+    { name: 'province_type_index', fields: ['type'] },
+    { name: 'province_deleted_index', fields: ['deleted'] }
+  ]
 })
 
 
@@ -97,12 +97,14 @@ const District = sql.define('districts', {
 }, {
   tableName: 'districts',
   timestamps: true,
+  initialAutoIncrement: '100001',
   paranoid: true,
-  // indexes: [
-  //   { name: 'district_name_index', fields: ['name'], type: 'FULLTEXT' },
-  //   { name: 'district_type_index', fields: ['type'] },
-  //   { name: 'district_deleted_index', fields: ['deleted'] }
-  // ]
+  indexes: [
+    { name: 'district_name_index', fields: ['name'], type: 'FULLTEXT' },
+    { name: 'district_type_index', fields: ['type'] },
+    { name: 'district_deleted_index', fields: ['deleted'] },
+    { name: 'district_provinceId_index', fields: ['provinceId'] },
+  ]
 })
 
 
@@ -149,12 +151,14 @@ const Ward = sql.define('wards', {
 }, {
   tableName: 'wards',
   timestamps: true,
+  initialAutoIncrement: '100001',
   paranoid: true,
-  // indexes: [
-  //   { name: 'ward_name_index', fields: ['name'], type: 'FULLTEXT' },
-  //   { name: 'ward_type_index', fields: ['type'] },
-  //   { name: 'ward_deleted_index', fields: ['deleted'] }
-  // ]
+  indexes: [
+    { name: 'ward_name_index', fields: ['name'], type: 'FULLTEXT' },
+    { name: 'ward_type_index', fields: ['type'] },
+    { name: 'ward_deleted_index', fields: ['deleted'] },
+    { name: 'ward_districtId_index', fields: ['districtId'] },
+  ]
 })
 
 export {

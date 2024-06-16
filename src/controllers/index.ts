@@ -1,5 +1,5 @@
 import AuthController from './Auth'
-import PlacementController from './Placement'
+import * as PlacementController from './Placement'
 
 /**
  * Wraps an asynchronous handler function with a try-catch block to handle errors.

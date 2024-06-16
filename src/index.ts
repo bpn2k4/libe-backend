@@ -8,6 +8,7 @@ import { AuthController } from '@controllers'
 import { sql } from '@databases'
 import { ErrorHandler, Logger } from '@middlewares'
 import { initModel } from '@models'
+import { RouterV1 } from '@routers'
 
 const main = async () => {
   for (const key in ENVIRONMENT) {
@@ -62,7 +63,7 @@ const main = async () => {
 
   })
 
-
+  app.use('/api/v1', RouterV1)
   app.use(ErrorHandler)
 
   app.listen(ENVIRONMENT.PORT, () => {

@@ -1,5 +1,5 @@
 import { ERROR_NAME, STATUS_CODE, STATUS_NAME } from '@configs'
-import { NextFunction, Request, Response } from '@types'
+import type { NextFunction, Request, Response } from 'express'
 
 
 const ErrorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {

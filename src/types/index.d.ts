@@ -1,18 +1,21 @@
-import type { Request as _Request, Response, NextFunction } from 'express'
-import { ValidationError } from 'joi'
+import type { Request as ExpressRequest, Response, NextFunction } from 'express'
+import { ValidationError, ValidationOptions } from 'joi'
 
 type Payload = {
   userId: String
 }
 
-type Request = _Request & Payload
+interface Request extends ExpressRequest {
+  payload?: Payload;
+}
+
 export {
   Request,
   Response,
   NextFunction
 }
 
-export type RequestHandler = (req: Request, res: Response) => Promise<Response | void>
+export type RequestHandler = (req: Request, res: Response) => Promise<void | Response>
 
 export type ServiceParams = {
   body?: any,
@@ -23,7 +26,7 @@ export type ServiceParams = {
   files?: Express.Multer.File[],
 }
 
-export type ServiceHandler = (data: ServiceParams) => any
+export type ServiceHandler = (data: ServiceParams) => Promise<any>
 
 export type ValidationParams = {
   body?: any,
@@ -32,4 +35,4 @@ export type ValidationParams = {
   payload?: any,
 }
 
-export { ValidationError }
+export { ValidationError, ValidationOptions }
