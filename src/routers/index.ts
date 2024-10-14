@@ -1,1 +1,1 @@
-export { default as RouterV1 } from './V1'
+export { default as ApiRouterV1 } from './V1'

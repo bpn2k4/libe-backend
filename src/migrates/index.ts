@@ -1,12 +1,14 @@
 
-import { ENVIRONMENT } from '@configs'
-import { Sequelize, Options } from 'sequelize'
 import fs from 'fs/promises'
+import path from 'path'
+import { Sequelize, Options } from 'sequelize'
+
+import { ENVIRONMENT } from '@configs'
 
 const main = async () => {
   const sqliteConfig: Options = {
     dialect: 'sqlite',
-    storage: './database.sqlite',
+    storage: path.join(ENVIRONMENT.SQLITE_DATA_DIR, 'database.sqlite'),
     logging: () => 1
   }
 
@@ -26,14 +28,14 @@ const main = async () => {
 
   await sql.authenticate()
 
-  const sqlFilePath = `./src/migrates/table.${ENVIRONMENT.SQL_DATABASE_TYPE}.sql` // ./migrate/table.sqlite.sql
+  const sqlFilePath = `migrate/${ENVIRONMENT.SQL_DATABASE_TYPE}.sql`
   const sqlQuery = await fs.readFile(sqlFilePath, 'utf8')
   const queries = sqlQuery.split(';').map(query => query.trim()).filter(query => query.length > 0).map(item => item.split("\n").filter(i => !i.startsWith("--")).join("\n"))
   for await (const query of queries) {
     console.log(query)
-    await sql.query(query)
+    // await sql.query(query)
   }
-  await sql.close()
+  // await sql.close()
 }
 
 main()

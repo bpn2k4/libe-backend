@@ -1,31 +1,49 @@
-
-
 import Joi from 'joi'
 
+import { validateOption } from './Common'
 import { ValidationParams, ValidationError } from '@types'
 import { DISTRICT_TYPE, PROVINCE_TYPE, WARD_TYPE } from '@configs'
 
-const option = { abortEarly: false }
 
 export const validateCreateProvince: ValidateCreateProvince = ({ body }) => {
   const bodySchema = Joi.object({
     name: Joi.string().required(),
     type: Joi.string().valid(PROVINCE_TYPE.CITY, PROVINCE_TYPE.PROVINCE).required()
   })
-  const { value: bodyValue, error: bodyError } = bodySchema.validate(body, option)
+  const { value: bodyValue, error: bodyError } = bodySchema.validate(body, validateOption)
   return { body: bodyValue, error: bodyError }
 }
 
 export const validateGetProvinces: ValidateGetProvinces = ({ query }) => {
   const querySchema = Joi.object({
-    page: Joi.number().default(0),
-    limit: Joi.number().min(0).max(250).default(20),
+    page: Joi.number().integer().default(0),
+    limit: Joi.number().integer().min(0).max(250).default(20),
     timestamp: Joi.boolean().default(false),
     q: Joi.string(),
     type: Joi.string().valid(PROVINCE_TYPE.CITY, PROVINCE_TYPE.PROVINCE)
   })
-  const { value: queryValue, error: queryError } = querySchema.validate(query, option)
+  const { value: queryValue, error: queryError } = querySchema.validate(query, validateOption)
   return { query: queryValue, error: queryError }
+}
+export const validateGetProvince: ValidateGetProvince = ({ params, query }) => {
+  const paramsSchema = Joi.object({
+    provinceId: Joi.number().required()
+  })
+  const querySchema = Joi.object({
+    timestamp: Joi.boolean().default(false)
+  })
+  const { value: paramsValue, error: paramsError } = paramsSchema.validate(params, validateOption)
+  const { value: queryValue, error: queryError } = querySchema.validate(query, validateOption)
+  return { params: paramsValue, query: queryValue, error: paramsError ?? queryError }
+}
+
+export const validateUpdateProvince: ValidateUpdateProvince = ({ body }) => {
+  const bodySchema = Joi.object({
+    name: Joi.string(),
+    type: Joi.string().valid(PROVINCE_TYPE.CITY, PROVINCE_TYPE.PROVINCE)
+  }).or('name', 'type')
+  const { value: bodyValue, error: bodyError } = bodySchema.validate(body, validateOption)
+  return { body: bodyValue, error: bodyError }
 }
 
 export const validateGetDistrictsInProvince: ValidateGetDistrictsInProvince = ({ params, query }) => {
@@ -33,8 +51,8 @@ export const validateGetDistrictsInProvince: ValidateGetDistrictsInProvince = ({
     provinceId: Joi.number().required()
   })
   const querySchema = Joi.object({
-    page: Joi.number().default(0),
-    limit: Joi.number().min(0).max(250).default(20),
+    page: Joi.number().integer().default(0),
+    limit: Joi.number().integer().min(0).max(250).default(20),
     timestamp: Joi.boolean().default(false),
     provinceId: Joi.boolean().default(false),
     q: Joi.string(),
@@ -46,8 +64,8 @@ export const validateGetDistrictsInProvince: ValidateGetDistrictsInProvince = ({
         DISTRICT_TYPE.URBAN_DISTRICT
       )
   })
-  const { value: paramsValue, error: paramsError } = paramsSchema.validate(params, option)
-  const { value: queryValue, error: queryError } = querySchema.validate(query, option)
+  const { value: paramsValue, error: paramsError } = paramsSchema.validate(params, validateOption)
+  const { value: queryValue, error: queryError } = querySchema.validate(query, validateOption)
   return { query: queryValue, params: paramsValue, error: paramsError ?? queryError }
 }
 
@@ -63,7 +81,7 @@ export const validateCreateDistrict: ValidateCreateDistrict = ({ body }) => {
         DISTRICT_TYPE.URBAN_DISTRICT
       ).required()
   })
-  const { value: bodyValue, error: bodyError } = bodySchema.validate(body, option)
+  const { value: bodyValue, error: bodyError } = bodySchema.validate(body, validateOption)
   return { body: bodyValue, error: bodyError }
 }
 
@@ -78,7 +96,7 @@ export const validateCreateWard: ValidateCreateWard = ({ body }) => {
         WARD_TYPE.WARD
       ).required()
   })
-  const { value: bodyValue, error: bodyError } = bodySchema.validate(body, option)
+  const { value: bodyValue, error: bodyError } = bodySchema.validate(body, validateOption)
   return { body: bodyValue, error: bodyError }
 }
 
@@ -87,8 +105,8 @@ export const validateGetWardsInDistrict: ValidateGetWardsInDistrict = ({ params,
     districtId: Joi.number().required()
   })
   const querySchema = Joi.object({
-    page: Joi.number().default(0),
-    limit: Joi.number().min(0).max(250).default(20),
+    page: Joi.number().integer().default(0),
+    limit: Joi.number().integer().min(0).max(250).default(20),
     timestamp: Joi.boolean().default(false),
     districtId: Joi.boolean().default(false),
     q: Joi.string(),
@@ -99,8 +117,8 @@ export const validateGetWardsInDistrict: ValidateGetWardsInDistrict = ({ params,
         WARD_TYPE.WARD
       )
   })
-  const { value: paramsValue, error: paramsError } = paramsSchema.validate(params, option)
-  const { value: queryValue, error: queryError } = querySchema.validate(query, option)
+  const { value: paramsValue, error: paramsError } = paramsSchema.validate(params, validateOption)
+  const { value: queryValue, error: queryError } = querySchema.validate(query, validateOption)
   return { query: queryValue, params: paramsValue, error: paramsError ?? queryError }
 }
 
@@ -117,6 +135,22 @@ type ValidateGetProvinces = (data: ValidationParams) => ({
     limit: number,
     timestamp: boolean,
     q?: string,
+    type?: string
+  },
+  error?: ValidationError
+})
+type ValidateGetProvince = (data: ValidationParams) => ({
+  params: {
+    provinceId: number,
+  },
+  query: {
+    timestamp: boolean,
+  }
+  error?: ValidationError
+})
+type ValidateUpdateProvince = (data: ValidationParams) => ({
+  body: {
+    name?: string,
     type?: string
   },
   error?: ValidationError

@@ -1,4 +1,6 @@
 import AuthController from './Auth'
+import * as CollectionController from './Collection'
+import * as ColorController from './Color'
 import * as PlacementController from './Placement'
 
 /**
@@ -23,9 +25,14 @@ const applyTryCatchAsyncHandler = (controller: any) => {
 
 // Apply error handling to all functions in the controller
 applyTryCatchAsyncHandler(AuthController)
+
+applyTryCatchAsyncHandler(CollectionController)
+applyTryCatchAsyncHandler(ColorController)
 applyTryCatchAsyncHandler(PlacementController)
 
 export {
   AuthController,
+  CollectionController,
+  ColorController,
   PlacementController
 }

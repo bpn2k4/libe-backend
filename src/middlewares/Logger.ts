@@ -7,7 +7,7 @@ const Logger = () => {
     res['startAt'] = Number(new Date())
     res.setHeader('x-powered-by', 'GPT-3.5')
     res.on('finish', () => {
-      const currentTime = Utils.getCurrentTime()
+      const currentTime = Utils.Helper.getCurrentTime()
       const startAt = res['startAt']
       const message = `${currentTime} ${req.method} ${req.originalUrl} ${res.statusCode} ${Number(new Date()) - startAt}ms`
       console.log(message)

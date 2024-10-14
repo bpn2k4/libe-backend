@@ -2,7 +2,7 @@ import { JoiValidationError, NotFoundError } from '@errors'
 import { District, Province, Ward } from '@models'
 import { ServiceHandler } from '@types'
 import { PlacementValidator } from '@validations'
-import { FindAndCountOptions, Op, sql } from '@databases'
+import { FindAndCountOptions, FindOptions, Op, sql } from '@databases'
 
 
 export const createProvince: ServiceHandler = async ({ body: body_ }) => {
@@ -17,8 +17,23 @@ export const createProvince: ServiceHandler = async ({ body: body_ }) => {
   return { province }
 }
 
-export const getProvince: ServiceHandler = async ({ body: body_ }) => {
-  return { message: "This will be implemented soon!" }
+export const getProvince: ServiceHandler = async ({ params: params_, query: query_ }) => {
+  const { params, query, error } = PlacementValidator.validateGetProvince({ params: params_, query: query_ })
+  if (error) {
+    throw new JoiValidationError(error)
+  }
+  const findOption: FindOptions = {
+    where: {
+      provinceId: params.provinceId,
+      deleted: false,
+    },
+    attributes: {
+      exclude: query.timestamp ? [] : ['deleted', 'createdAt', 'updatedAt', 'deletedAt']
+    },
+    paranoid: false
+  }
+  const province = await Province.findOne(findOption)
+  return { province, params, query }
 }
 
 export const getProvinces: ServiceHandler = async ({ query: query_ }) => {
@@ -44,7 +59,11 @@ export const getProvinces: ServiceHandler = async ({ query: query_ }) => {
 }
 
 export const updateProvince: ServiceHandler = async ({ body: body_ }) => {
-  return { message: "This will be implemented soon!" }
+  const { body, error } = PlacementValidator.validateUpdateProvince({ body: body_ })
+  if (error) {
+    throw new JoiValidationError(error)
+  }
+  return { body: body }
 }
 
 export const deleteProvince: ServiceHandler = async ({ body: body_ }) => {
@@ -100,19 +119,18 @@ export const createDistrict: ServiceHandler = async ({ body: body_ }) => {
     throw new JoiValidationError(error)
   }
   const t = await sql.transaction()
-  const province = await Province.findOne({
-    where: {
-      provinceId: body.provinceId,
-      deleted: false
-    },
-    transaction: t,
-    paranoid: false
-  })
-  if (!province) {
-    await t.commit()
-    throw new NotFoundError(`provinceId ${body.provinceId}`)
-  }
   try {
+    const province = await Province.findOne({
+      where: {
+        provinceId: body.provinceId,
+        deleted: false
+      },
+      transaction: t,
+      paranoid: false
+    })
+    if (!province) {
+      throw new NotFoundError(`provinceId ${body.provinceId}`)
+    }
     const district = await District.create({
       ...body
     }, { transaction: t })
@@ -125,19 +143,24 @@ export const createDistrict: ServiceHandler = async ({ body: body_ }) => {
 }
 
 export const getWardsInDistrict: ServiceHandler = async ({ params: params_, query: query_ }) => {
+
   const { params, query, error } = PlacementValidator.validateGetWardsInDistrict({ params: params_, query: query_ })
+
   if (error) {
     throw new JoiValidationError(error)
   }
+
   const district = await District.findOne({
     where: {
       districtId: params.districtId,
       deleted: false,
     }
   })
+
   if (!district) {
     throw new NotFoundError(`provinceId ${params.districtId}`)
   }
+
   const findOption: FindAndCountOptions = {
     where: {
       districtId: params.districtId,
@@ -155,7 +178,9 @@ export const getWardsInDistrict: ServiceHandler = async ({ params: params_, quer
     offset: query.limit * query.page,
     paranoid: false
   }
+
   const { rows: wards, count: total } = await Ward.findAndCountAll(findOption)
+
   return { wards, total }
 }
 

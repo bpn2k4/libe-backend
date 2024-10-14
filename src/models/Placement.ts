@@ -1,6 +1,8 @@
 import {
   BOOLEAN,
+  DATE,
   INTEGER,
+  NOW,
   STRING,
   sql
 } from '@databases'
@@ -21,7 +23,7 @@ import {
  * - paranoid: Enables soft deletes with a deletedAt timestamp
  * - indexes: An array for defining indexes, currently empty
  */
-const Province = sql.define('provinces', {
+const Province = sql.define('province', {
   provinceId: {
     type: INTEGER,
     autoIncrement: true,
@@ -70,7 +72,7 @@ const Province = sql.define('provinces', {
  * - paranoid: Enables soft deletes with a deletedAt timestamp
  * - indexes: An array for defining indexes, currently empty
  */
-const District = sql.define('districts', {
+const District = sql.define('district', {
   districtId: {
     type: INTEGER,
     autoIncrement: true,
@@ -124,7 +126,7 @@ const District = sql.define('districts', {
  * - paranoid: Enables soft deletes with a deletedAt timestamp
  * - indexes: An array for defining indexes, currently empty
  */
-const Ward = sql.define('wards', {
+const Ward = sql.define('ward', {
   wardId: {
     type: INTEGER,
     autoIncrement: true,
@@ -139,26 +141,33 @@ const Ward = sql.define('wards', {
     type: STRING,
     allowNull: false
   },
+  districtId: {
+    type: INTEGER,
+    allowNull: false
+  },
   deleted: {
     type: BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
-  districtId: {
-    type: INTEGER,
-    allowNull: false
+  createdAt: {
+    type: DATE,
+    allowNull: false,
+    defaultValue: NOW
+  },
+  updatedAt: {
+    type: DATE,
+    allowNull: false,
+    defaultValue: NOW
+  },
+  deletedAt: {
+    type: DATE,
+    allowNull: true
   }
 }, {
   tableName: 'wards',
-  timestamps: true,
+  timestamps: false,
   initialAutoIncrement: '100001',
-  paranoid: true,
-  indexes: [
-    { name: 'ward_name_index', fields: ['name'], type: 'FULLTEXT' },
-    { name: 'ward_type_index', fields: ['type'] },
-    { name: 'ward_deleted_index', fields: ['deleted'] },
-    { name: 'ward_districtId_index', fields: ['districtId'] },
-  ]
 })
 
 export {

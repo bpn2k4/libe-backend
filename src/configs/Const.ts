@@ -18,3 +18,16 @@ export const WARD_TYPE = {
   TOWNSHIP: 'TOWNSHIP',
   WARD: 'WARD'
 }
+
+export const GENDER_TYPE = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER',
+  UNDEFINED: 'UNDEFINED'
+}
+
+export const ROLE_TYPE = {
+  SUPER_ADMIN: 'SUPER_ADMIN',
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+}

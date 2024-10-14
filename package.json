@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && tsc-alias",
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "dev": "nodemon --exec ts-node src/index.ts --watch src",
     "start": "node dist/index.js",
     "migrate": "node dist/migrates/index.js",
     "migrate:ts": "ts-node src/migrates/index.ts",
+    "test": "",
     "update": "npm update --save && npm update --save-dev"
   },
   "author": "",

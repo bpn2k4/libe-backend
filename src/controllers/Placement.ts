@@ -11,6 +11,7 @@ export const createProvince: RequestHandler = async (req, res) => {
     ...data
   })
 }
+
 export const getProvinces: RequestHandler = async (req, res) => {
   const { query } = req
   const data = await PlacementService.getProvinces({ query })
@@ -19,14 +20,16 @@ export const getProvinces: RequestHandler = async (req, res) => {
     ...data
   })
 }
+
 export const getProvince: RequestHandler = async (req, res) => {
-  const { body } = req
-  const data = await PlacementService.getProvince({ body })
+  const { params, query } = req
+  const data = await PlacementService.getProvince({ params, query })
   return res.status(STATUS_CODE.SUCCESS).json({
     status: STATUS_NAME.SUCCESS,
     ...data
   })
 }
+
 export const updateProvince: RequestHandler = async (req, res) => {
   const { body } = req
   const data = await PlacementService.updateProvince({ body })
@@ -35,6 +38,7 @@ export const updateProvince: RequestHandler = async (req, res) => {
     ...data
   })
 }
+
 export const deleteProvince: RequestHandler = async (req, res) => {
   const { body } = req
   const data = await PlacementService.deleteProvince({ body })
@@ -43,6 +47,7 @@ export const deleteProvince: RequestHandler = async (req, res) => {
     ...data
   })
 }
+
 export const deleteProvinces: RequestHandler = async (req, res) => {
   const { body } = req
   const data = await PlacementService.deleteProvinces({ body })
